@@ -23,16 +23,19 @@ import java.util.Scanner;
  * @author Usuario
  */
 public class JuegoServicio {
-        private Scanner leer = new Scanner(System.in).useDelimiter("\n");
-        public void crearJugadores() {
+
+    private Scanner leer = new Scanner(System.in).useDelimiter("\n");
+    public Juego juego;
+    RevolverServicio rs = new RevolverServicio();
+
+    public void llenarJuego() {
         boolean control = false;
-        List<Jugador> ls=new ArrayList();
-        RevolverServicio rs=new RevolverServicio();
-        //Revolver r = rs.cargarRevolver();
+        List<Jugador> ls = new ArrayList();
+
         do {
             System.out.println("Ingrese la cantidad de Jugadores (1 a 6)");
             int cant = leer.nextInt();
-            if (0 > cant && cant <= 6) {
+            if (0 < cant && cant <= 6) {
                 for (int i = 0; i < cant; i++) {
                     Jugador j = new Jugador(i + 1);
                     ls.add(j);
@@ -40,11 +43,30 @@ public class JuegoServicio {
                 control = true;
             }
         } while (!control);
-        Juego juego = new Juego(ls,rs.cargarRevolver());
+        juego = new Juego(ls, rs.llenarRevolver());
     }
-        
-        public void ronda(){
-    //Falta
-}
-    
+
+    public void ronda() {
+        int posJugador = ((int) (Math.random() * juego.getJugadores().size()) + 1);
+        Jugador j;
+        boolean terminado = false;
+        do {
+            if (posJugador == juego.getJugadores().size()) {
+                posJugador = 0;
+            }
+            j = juego.jugadores.get(posJugador);
+            System.out.println("Es el turno del Jugador: "+j.getNombre());
+
+            if (!rs.mojar()) {
+                System.out.println("No se moja, pasa al siguiente jugador");
+                rs.siguienteChorro();
+                posJugador++;
+
+            } else {
+                j.setMojado(true);
+                terminado=true;
+            }
+        } while (!terminado);
+        System.out.println("El jugador mojado es: "+j.getNombre());
+    }
 }

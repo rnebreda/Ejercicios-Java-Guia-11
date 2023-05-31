@@ -19,7 +19,7 @@ import java.util.List;
  * @author Usuario
  */
 public class Juego {
-    private List<Jugador> jugadores;
+    public List<Jugador> jugadores;
     private Revolver revolver;
 
     public Juego() {

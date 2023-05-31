@@ -33,26 +33,4 @@ public class JugadorServicio {
     }
 }
 
-//    public boolean disparo() {
-//        int inicio = ((int) (Math.random() * jugadores.size())) + 1;
-//        Jugador j;
-//        do {
-//            if (inicio == jugadores.size()) {
-//                inicio = 0;
-//            }
-//            j = jugadores.get(inicio);
-//
-//            if (!rs.mojar()) {
-//                rs.siguienteChorro();
-//                inicio++;
-//
-//            } else {
-//                j.setMojado(true);
-//                if (true) {
-//
-//                }
-//                j = jugadores.get(inicio + 1)
-//            }
-//        } while (true);
-//    }
 

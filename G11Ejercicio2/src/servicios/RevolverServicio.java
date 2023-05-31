@@ -27,7 +27,8 @@ public class RevolverServicio {
     public Revolver llenarRevolver() {
         int actual = (int) (Math.random() * cantidadTambor);
         int agua = (int) (Math.random() * cantidadTambor);
-        return new Revolver(actual, agua);
+        revolver= new Revolver(actual, agua);
+        return revolver;
     }
 
     public boolean mojar() {
@@ -42,8 +43,4 @@ public class RevolverServicio {
         }
     }
     
-    public Revolver cargarRevolver(){
-        return revolver;
-    }
-
 }

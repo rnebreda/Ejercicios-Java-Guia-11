@@ -37,6 +37,8 @@ Pensar la lógica necesaria para realizar esto, usando los atributos de la clase
  */
 package g11ejercicio2;
 
+import servicios.JuegoServicio;
+
 /**
  *
  * @author Usuario
@@ -47,7 +49,9 @@ public class G11Ejercicio2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        JuegoServicio js = new JuegoServicio();
+        js.llenarJuego();
+        js.ronda();
     }
     
 }
