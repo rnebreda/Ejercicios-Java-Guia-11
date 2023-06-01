@@ -18,6 +18,9 @@ luego se llama al método, este no mostrara esa primera carta
  */
 package g11ejercicio3;
 
+import java.util.Scanner;
+import servicios.BarajaServicio;
+
 /**
  *
  * @author Usuario
@@ -28,7 +31,39 @@ public class G11Ejercicio3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        BarajaServicio bs = new BarajaServicio();
+        bs.crearBaraja();
+        Scanner leer = new Scanner(System.in).useDelimiter("\n");
+        int opcion;
+
+        do {
+            System.out.println("1 - Barajar");
+            System.out.println("2 - Dar cartas");
+            System.out.println("3 - Cartas disponibles");
+            System.out.println("4 - Cartas del Montón");
+            System.out.println("5 - Mostrar Baraja");
+            System.out.println("99 - Salir");
+            System.out.println("Ingrese una opción");
+            opcion = leer.nextInt();
+            switch (opcion) {
+                case 1:
+                    bs.barajar();
+                    break;
+                case 2:
+                    bs.darCartas();
+                    break;
+                case 3:
+                    bs.cartasDisponibles();
+                    break;
+                case 4:
+                    bs.cartasMonton();
+                    break;
+                case 5:
+                    bs.mostrarBaraja();
+                    break;
+            }
+        } while (opcion != 99);
+
     }
-    
+
 }

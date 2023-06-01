@@ -32,10 +32,10 @@ public class BarajaServicio {
     List<Carta> monton = new ArrayList();
     Palos[] e = enums.Palos.values();
 
-    private void crearBaraja() {
+    public void crearBaraja() {
         List<Carta> aux = new ArrayList();
         for (int i = 1; i <= 12; i++) {
-            if (i != 8 || i != 9) {
+            if (i != 8 && i != 9) {
                 for (int j = 0; j < 4; j++) {
                     Carta c = new Carta(i, e[j]);
                     aux.add(c);
@@ -56,6 +56,7 @@ public class BarajaServicio {
             System.out.println("No hay cartas en la baraja");
         }else{
         c=b.getCartas().get(0);
+        b.getCartas().remove(0);
         }
         return c;
     }
@@ -73,6 +74,26 @@ public class BarajaServicio {
             for (int i = 0; i < cantidad; i++) {
                 monton.add(siguienteCarta());
             }
+        }
+    }
+    
+    public void cartasMonton(){
+        if (monton.isEmpty()) {
+            System.out.println("No hay cartas en el montón");
+        }else{
+            for (Carta c : monton) {
+                System.out.println(c.toString());
+            }
+        }
+    }
+    
+    public void mostrarBaraja(){
+        if (b.getCartas().isEmpty()) {
+                       System.out.println("No hay cartas en el montón");
+        }else{
+            b.getCartas().forEach((c) -> {
+                System.out.println(c.toString());
+            });
         }
     }
 }
