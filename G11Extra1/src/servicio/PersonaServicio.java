@@ -14,6 +14,7 @@ import entidades.Persona;
 import enumeraciones.Raza;
 import enumeraciones.Tamanio;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -73,23 +74,61 @@ public class PersonaServicio {
             System.out.println(p.toString());
         }
     }
-    
-    public void adoptarPerro(){
+
+    public void adoptarPerro() {
         Persona aux;
+        Perro auxPerro;
         System.out.println("Ingrese su nombre");
-        String nombre= leer.next();
-        //Falta terminar.
-        for (Persona p : personas) {
-            
+        String nombre = leer.next();
+        Iterator<Persona> it = personas.iterator();
+        List<Perro> ls = new ArrayList();
+        boolean salida = false;
+
+        if (personas.isEmpty()) {
+            System.out.println("Debe darse de alta en la Lista antes de adoptar");
         }
-        listarPerros();
-        System.out.println("Elija el nombre de un perro");
-        String elegido= leer.next();
-        for (Perro p : enAdopcion) {
-            if (p.getNombre().equalsIgnoreCase(elegido)) {
-                
+
+        while (it.hasNext()) {
+            aux = it.next();
+            if (aux.getNombre().equalsIgnoreCase(nombre)) {
+                do {
+                    if (enAdopcion.isEmpty()) {
+                        System.out.println("No hay perros en adopcion en este momento");
+                        salida=false;
+                    } else {
+                        listarPerros();
+                        System.out.println("Elija el nombre de un perro");
+                        String elegido = leer.next();
+                        Iterator<Perro> ip = enAdopcion.iterator();
+
+                        while (ip.hasNext()) {
+                            auxPerro = ip.next();
+                            if (auxPerro.getNombre().equalsIgnoreCase(elegido)) {
+                                ls.add(auxPerro);
+                                ip.remove();
+                                System.out.println("Desea adoptar otro perro? (S=Si)");
+                                salida = leer.next().equalsIgnoreCase("S");
+                            } else {
+                                System.out.println("Ese perro no se encuentra en la lista");
+                            }
+                        }
+                    }
+
+                } while (!salida);
+                aux.setMascota(ls);
+
+            } else {
+                System.out.println("Debe darse de alta en la Lista antes de adoptar");
             }
-            
+
+        }
+
+    }
+    
+    public void mostrarMascotas(Persona p){
+        for (Perro perro : p.getMascota()) {
+            System.out.println(perro.getNombre());
         }
     }
+
 }

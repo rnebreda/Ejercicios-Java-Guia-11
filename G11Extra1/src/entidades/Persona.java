@@ -71,7 +71,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "nombre= " + nombre + ", apellido= " + apellido + ", edad= " + edad + ", documento= " + documento + ", mascota=" + mascota + '}';
+        return nombre + " " + apellido + ", edad= " + edad + ", documento= " + documento + ", mascota=" + mascota + '}';
     }
 
 
