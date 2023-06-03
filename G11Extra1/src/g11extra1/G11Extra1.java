@@ -27,6 +27,10 @@ public class G11Extra1 {
         System.out.println("");
         ps.crearPersonas();
         ps.listarPersonas();
+        ps.adoptarPerro();
+        ps.listarPerros();
+        System.out.println("");
+        ps.mostrarMascotas();
     }
 
 }
