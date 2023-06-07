@@ -28,6 +28,8 @@ cada asiento o solo las X y espacios vacíos.
  */
 package g11extra2;
 
+import servicios.CineServicio;
+
 /**
  *
  * @author Usuario
@@ -38,7 +40,15 @@ public class G11Extra2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+       CineServicio c = new CineServicio();
+       c.crearCine();
+       c.crearEspectadores();
+        System.out.println("");
+       c.llenarSala(c.cine);
+        System.out.println("");
+       c.mostrarSala();
+        System.out.println("");
+       c.mostrarEspectadores();
     }
     
 }

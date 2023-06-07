@@ -12,13 +12,15 @@ import java.util.Map;
  */
 public class Cine {
     private Pelicula pelicula;
-    private Map<String,Boolean> sala;
+    private Map<Asiento,Boolean> sala;
     private double precio;
+    private int asientosDisponibles;
 
-    public Cine(Pelicula pelicula, Map sala, double precio) {
+    public Cine(Pelicula pelicula, Map<Asiento, Boolean> sala, double precio, int asientosDisponibles) {
         this.pelicula = pelicula;
         this.sala = sala;
         this.precio = precio;
+        this.asientosDisponibles = asientosDisponibles;
     }
 
     public Cine() {
@@ -32,11 +34,11 @@ public class Cine {
         this.pelicula = pelicula;
     }
 
-    public Map getSala() {
+    public Map<Asiento, Boolean> getSala() {
         return sala;
     }
 
-    public void setSala(Map sala) {
+    public void setSala(Map<Asiento, Boolean> sala) {
         this.sala = sala;
     }
 
@@ -47,6 +49,14 @@ public class Cine {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
-    
+
+    public int getAsientosDisponibles() {
+        return asientosDisponibles;
+    }
+
+    public void setAsientosDisponibles(int asientosDisponibles) {
+        this.asientosDisponibles = asientosDisponibles;
+    }
+
+     
 }

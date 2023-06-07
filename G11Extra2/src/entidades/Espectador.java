@@ -4,6 +4,8 @@ nombre, edad y el dinero que tiene disponible.
  */
 package entidades;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Usuario
@@ -12,11 +14,13 @@ public class Espectador {
     private String nombre;
     private int edad;
     private double dinero;
+    private Asiento ticket;
 
-    public Espectador(String nombre, int edad, double dinero) {
+    public Espectador(String nombre, int edad, double dinero, Asiento ticket) {
         this.nombre = nombre;
         this.edad = edad;
         this.dinero = dinero;
+        this.ticket = ticket;
     }
 
     public Espectador() {
@@ -45,6 +49,20 @@ public class Espectador {
     public void setDinero(double dinero) {
         this.dinero = dinero;
     }
+
+    public Asiento getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Asiento ticket) {
+        this.ticket = ticket;
+    }
     
+        public static Comparator<Espectador> compararMenor = new Comparator<Espectador>() {
+        @Override
+        public int compare(Espectador t, Espectador t1) {
+          return t.getNombre().compareTo(t1.getNombre());
+        }
+    };
     
 }

@@ -13,11 +13,10 @@ import java.util.Comparator;
  */
 public class Asiento {
     private String filaColumna;
-    private Boolean ocupado;
+   
 
-    public Asiento(String filaColumna, Boolean ocupado) {
+    public Asiento(String filaColumna) {
         this.filaColumna = filaColumna;
-        this.ocupado = ocupado;
     }
 
     public Asiento() {
@@ -31,13 +30,11 @@ public class Asiento {
         this.filaColumna = filaColumna;
     }
 
-    public Boolean getOcupado() {
-        return ocupado;
+    @Override
+    public String toString() {
+        return  filaColumna + " ";
     }
 
-    public void setOcupado(Boolean ocupado) {
-        this.ocupado = ocupado;
-    }
     
     public static Comparator<Asiento> compararMayor = new Comparator<Asiento>() {
         @Override

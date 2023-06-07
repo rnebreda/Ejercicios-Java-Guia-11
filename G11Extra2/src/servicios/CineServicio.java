@@ -28,6 +28,8 @@ import entidades.Cine;
 import entidades.Espectador;
 import entidades.Pelicula;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -42,44 +44,125 @@ public class CineServicio {
 
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
     Map<Asiento, Boolean> sala = new TreeMap(Asiento.compararMayor);
-    List<Espectador> espectadores= new ArrayList();
-    Cine cine;
+    List<Espectador> espectadores = new ArrayList();
+    public Cine cine;
+    final int filas = 8;
+    String[] columnas = {"A", "B", "C", "D", "E", "F"};
 
     public void crearCine() {
-        Asiento aux = new Asiento();
+
         Pelicula p = new Pelicula("ET", 120, 16, "Spilberg");
-        String[] columna = {"A", "B", "C", "D", "E", "F"};
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 0; j < columna.length; j++) {
-                aux.setFilaColumna(i + columna[j]);
-                sala.put(aux, false);
+
+        for (int i = 1; i <= filas; i++) {
+            for (int j = 0; j < columnas.length; j++) {
+                Asiento aux = new Asiento();
+                aux.setFilaColumna(String.valueOf(i) + columnas[j]);
+                Boolean ocupado = false;
+                sala.put(aux, ocupado);
             }
 
         }
-        cine= new Cine(p, sala, 1000);
+        cine = new Cine(p, sala, 1000, filas * columnas.length);
+        mostrarSala();
 
     }
-    
-    public void crearEspectadores(){
+
+    public void crearEspectadores() {
         Espectador aux;
-        int cantidad = (int) (Math.random()*60);
-        for (int i = 0; i < cantidad; i++) {
-            String nombre="Espectador"+i;
-            int edad = (int) (Math.random()*100);
-            int dinero = (int)(Math.random()*10000);
-            aux= new Espectador(nombre, edad, dinero);
+        String esp ="";
+        int cantidad = (int) (Math.random() * 60);
+        for (int i = 1; i <= cantidad; i++) {
+            if (i<10) {
+                esp="0";
+            }else{
+                esp="";
+            }
+            String nombre = "Espectador" + esp+i;
+            int edad = (int) (Math.random() * 100);
+            int dinero = (int) (Math.random() * 10000);
+            aux = new Espectador(nombre, edad, dinero, null);
             espectadores.add(aux);
         }
+        System.out.println("La cantidad de espectadores es: " + espectadores.size());
     }
-    
-    public void llenarSala(){
+
+    public void llenarSala(Cine c) {
+        Asiento k = null, butaca = null;
+        Boolean v, disponible = true;
+        int indice;
         Espectador aux;
+        Collections.shuffle(espectadores);
         Iterator<Espectador> it = espectadores.iterator();
-        while (it.hasNext()){
-            aux=it.next();
-            if (aux.getEdad()>= cine.getPelicula().getEdadMin()&&) {
-                
+
+        while (it.hasNext()) {
+            aux = it.next();
+            disponible = true;
+            if (aux.getEdad() >= c.getPelicula().getEdadMin()) {
+
+                if (aux.getDinero() >= c.getPrecio()) {
+
+                    if (c.getAsientosDisponibles() > 0) {
+                        for (Map.Entry<Asiento, Boolean> entry : c.getSala().entrySet()) {
+                            if (!entry.getValue() && disponible) {
+                                k = entry.getKey();
+                                entry.setValue(true);
+                                v = entry.getValue();
+                                indice = entry.hashCode();
+                                c.setAsientosDisponibles(c.getAsientosDisponibles() - 1);
+                                disponible = false;
+                                break;
+                            }
+
+                        }
+                    } else {
+                        System.out.println("No quedan asientos disponibles");
+                    }
+                } else {
+                    System.out.println(aux.getNombre() + ": No tiene suficiente dinero. Disponible: " + aux.getDinero());
+                }
+            } else {
+                System.out.println(aux.getNombre() + ": No tiene suficiente edad para esta película. Edad: " + aux.getEdad());
             }
-        }  
+            if (!disponible) {
+                aux.setTicket(k);
+                sala.put(k, true);
+                c.setSala(sala);
+            }
+
+        }
+    }
+
+    public void mostrarSala() {
+        int aux = 1;
+        String k = "";
+        Boolean v = false;
+
+        for (Map.Entry<Asiento, Boolean> entry : sala.entrySet()) {
+            k = entry.getKey().getFilaColumna();
+            v = entry.getValue();
+
+            System.out.print(k);
+            if (v) {
+                System.out.print("X ");
+            } else {
+                System.out.print("0 ");
+            }
+            if ((aux % columnas.length) == 0) {
+                System.out.println("");
+            }
+            aux++;
+        }
+    }
+
+    public void mostrarEspectadores() {
+        Collections.sort(espectadores, Espectador.compararMenor);
+        for (Espectador e : espectadores) {
+            if (e.getTicket() == null) {
+                System.out.println(e.getNombre() + " Sin ticket");
+            } else {
+                System.out.println(e.getNombre() + " " + e.getTicket());
+            }
+        }
+
     }
 }
