@@ -29,7 +29,6 @@ import entidades.Espectador;
 import entidades.Pelicula;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +68,7 @@ public class CineServicio {
 
     public void crearEspectadores() {
         Espectador aux;
-        String esp ="";
+        String esp;
         int cantidad = (int) (Math.random() * 60);
         for (int i = 1; i <= cantidad; i++) {
             if (i<10) {
@@ -125,6 +124,7 @@ public class CineServicio {
             }
             if (!disponible) {
                 aux.setTicket(k);
+                aux.setDinero(aux.getDinero()-1000);
                 sala.put(k, true);
                 c.setSala(sala);
             }
@@ -158,9 +158,9 @@ public class CineServicio {
         Collections.sort(espectadores, Espectador.compararMenor);
         for (Espectador e : espectadores) {
             if (e.getTicket() == null) {
-                System.out.println(e.getNombre() + " Sin ticket");
+                System.out.println(e.getNombre() + " Sin ticket" + " disponible= "+e.getDinero() );
             } else {
-                System.out.println(e.getNombre() + " " + e.getTicket());
+                System.out.println(e.getNombre() + " " + e.getTicket()+ " disponible= "+e.getDinero());
             }
         }
 
