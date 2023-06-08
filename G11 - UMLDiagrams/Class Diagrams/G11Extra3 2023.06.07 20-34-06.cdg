@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="G11Extra3">
+  <ClassDiagramComponents>
+    <Class name="Cliente" package="entidades" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Cuota" package="entidades" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Poliza" package="entidades" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Vehiculo" package="entidades" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="G11Extra3" package="g11extra3" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ServicioSeguro" package="servicio" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Cobertura" package="enumeraciones" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Literals/>
+    </Enum>
+    <Enum name="FormaPago" package="enumeraciones" visibility="public" xPosition="1241.0" yPosition="153.0">
+      <Literals/>
+    </Enum>
+    <Enum name="TipoVehiculo" package="enumeraciones" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Literals/>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="G11Extra3">
+  <ClassDiagramComponents>
+    <Class name="Cliente" package="entidades" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="NombreApellido" type="String" visibility="private"/>
+        <Field name="documento" type="String" visibility="private"/>
+        <Field name="mail" type="String" visibility="private"/>
+        <Field name="domicilio" type="String" visibility="private"/>
+        <Field name="telefono" type="String" visibility="private"/>
+        <Field name="polizas" type="List&lt;Poliza&gt;" visibility="private"/>
+        <Field name="vehiculos" type="List&lt;Vehiculo&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Cuota" package="entidades" visibility="public" xPosition="316.0" yPosition="525.0">
+      <Fields>
+        <Field name="numCuota" type="String" visibility="private"/>
+        <Field name="monto" type="Double" visibility="private"/>
+        <Field name="pagada" type="Boolean" visibility="private"/>
+        <Field name="vencimiento" type="Date" visibility="private"/>
+        <Field name="pago" type="FormaPago" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Poliza" package="entidades" visibility="public" xPosition="316.0" yPosition="122.0">
+      <Fields>
+        <Field name="vehiculo" type="Vehiculo" visibility="private"/>
+        <Field name="numPoliza" type="String" visibility="private"/>
+        <Field name="pago" type="FormaPago" visibility="private"/>
+        <Field name="cobertura" type="Cobertura" visibility="private"/>
+        <Field name="fechaInicio" type="Date" visibility="private"/>
+        <Field name="fechaFin" type="Date" visibility="private"/>
+        <Field name="montoTotal" type="Double" visibility="private"/>
+        <Field name="montoGranizo" type="Double" visibility="private"/>
+        <Field name="granizo" type="Boolean" visibility="private"/>
+        <Field name="cuotas" type="List&lt;Cuota&gt;" visibility="private"/>
+        <Field name="cantCuotas" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Vehiculo" package="entidades" visibility="public" xPosition="935.0" yPosition="20.0">
+      <Fields>
+        <Field name="marca" type="String" visibility="private"/>
+        <Field name="modelo" type="String" visibility="private"/>
+        <Field name="anio" type="String" visibility="private"/>
+        <Field name="numMotor" type="String" visibility="private"/>
+        <Field name="chasis" type="String" visibility="private"/>
+        <Field name="color" type="String" visibility="private"/>
+        <Field name="tipo" type="TipoVehiculo" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="G11Extra3" package="g11extra3" visibility="public" xPosition="20.0" yPosition="669.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ServicioSeguro" package="servicio" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Cobertura" package="enumeraciones" visibility="public" xPosition="655.0" yPosition="225.0">
+      <Literals>
+        <Literal name="TOTAL"/>
+        <Literal name="PARCIAL"/>
+        <Literal name="CONTRA_TERCERO"/>
+        <Literal name="OTRO"/>
+      </Literals>
+    </Enum>
+    <Enum name="FormaPago" package="enumeraciones" visibility="public" xPosition="655.0" yPosition="420.0">
+      <Literals>
+        <Literal name="CONTADO"/>
+        <Literal name="DEBITO"/>
+        <Literal name="TRANSFERENCIA"/>
+        <Literal name="OTRO"/>
+      </Literals>
+    </Enum>
+    <Enum name="TipoVehiculo" package="enumeraciones" visibility="public" xPosition="1174.0" yPosition="26.0">
+      <Literals>
+        <Literal name="SEDAN"/>
+        <Literal name="CAMIONETA"/>
+        <Literal name="MOTO"/>
+        <Literal name="CAMION"/>
+        <Literal name="CUATRI"/>
+        <Literal name="SUV"/>
+        <Literal name="OTRO"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="polizas" source="entidades.Cliente" target="entidades.Poliza" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Poliza&gt;"/>
+    <HasRelation name="pago" source="entidades.Cuota" target="enumeraciones.FormaPago" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="auto" source="entidades.Poliza" target="entidades.Vehiculo" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="cobertura" source="entidades.Poliza" target="enumeraciones.Cobertura" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="vehiculos" source="entidades.Cliente" target="entidades.Vehiculo" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Vehiculo&gt;"/>
+    <HasRelation name="tipo" source="entidades.Vehiculo" target="enumeraciones.TipoVehiculo" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cuotas" source="entidades.Poliza" target="entidades.Cuota" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Cuota&gt;"/>
+    <HasRelation name="pago" source="entidades.Poliza" target="enumeraciones.FormaPago" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
