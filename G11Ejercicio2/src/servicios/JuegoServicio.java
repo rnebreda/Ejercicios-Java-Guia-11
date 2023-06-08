@@ -36,8 +36,8 @@ public class JuegoServicio {
             System.out.println("Ingrese la cantidad de Jugadores (1 a 6)");
             int cant = leer.nextInt();
             if (0 < cant && cant <= 6) {
-                for (int i = 0; i < cant; i++) {
-                    Jugador j = new Jugador(i + 1);
+                for (int i = 1; i <= cant; i++) {
+                    Jugador j = new Jugador(i);
                     ls.add(j);
                 }
                 control = true;
