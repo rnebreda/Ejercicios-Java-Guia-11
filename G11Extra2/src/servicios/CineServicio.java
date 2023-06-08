@@ -163,7 +163,9 @@ public class CineServicio {
 
             System.out.print(k);
             if (v) {
-                System.out.print("X ");
+                //"\033[1;31m"
+                //"X \033[0m"
+                System.out.print("\033[1;31mX \033[0m");
             } else {
                 System.out.print("0 ");
             }
