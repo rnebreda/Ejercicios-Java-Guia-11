@@ -28,8 +28,6 @@ public class PersonaServicio {
     List<Persona> personas = new ArrayList();
     List<Perro> enAdopcion = new ArrayList();
     String[] nombresDePerros = {"Cacho", "Cholo", "Chacho", "Chicho", "Checho"};
-    //List<String> nombres=new ArrayList();
-    //List<String> apellidos=new ArrayList();
     Raza[] razas = enumeraciones.Raza.values();
     Tamanio[] tamanios = enumeraciones.Tamanio.values();
 
@@ -135,7 +133,7 @@ public class PersonaServicio {
                 break;
             }
             if (!enLista) {
-                System.out.println("Su nombre no está en la lista de adoptar");
+                System.out.println("Debe darse de alta en la Lista antes de adoptar");
             }
 
         }
@@ -158,4 +156,40 @@ public class PersonaServicio {
             }
         }
     }
+
+    public void agregarPersona() {
+        String nombre, apellido;
+        int edad, documento;
+        System.out.println("Ingrese Nombre y Apellido");
+        nombre = leer.next();
+        apellido = leer.next();
+        System.out.println("Ingrese su edad");
+        edad = leer.nextInt();
+        System.out.println("Ingrese su DNI");
+        documento = leer.nextInt();
+        Persona p = new Persona(nombre, apellido, edad, documento, null);
+        personas.add(p);
+    }
+
+    public void agregarPerro() {
+        System.out.println("Ingrese el nombre del perro");
+        String nombre= leer.next();
+        System.out.println("Ingrese la raza del perro:");
+        for (int i = 0; i < razas.length; i++) {
+            System.out.print(i + " - "+razas[i]+", ");
+        }
+        System.out.println("");
+        Raza raza= razas [leer.nextInt()];
+        System.out.println("Ingrese el tamaño:");
+        for (int i = 0; i < tamanios.length; i++) {
+            System.out.print(i + " - "+tamanios[i]+", ");
+        }
+        System.out.println("");
+        Tamanio tamanio= tamanios [leer.nextInt()];
+        System.out.println("Ingrese la edad");
+        int edad= leer.nextInt();
+        Perro p = new Perro(nombre, raza, edad, tamanio);
+        enAdopcion.add(p);
+    }
+
 }
