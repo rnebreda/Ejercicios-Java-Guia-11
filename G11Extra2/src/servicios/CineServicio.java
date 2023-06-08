@@ -71,12 +71,12 @@ public class CineServicio {
         String esp;
         int cantidad = (int) (Math.random() * 60);
         for (int i = 1; i <= cantidad; i++) {
-            if (i<10) {
-                esp="0";
-            }else{
-                esp="";
+            if (i < 10) {
+                esp = "0";
+            } else {
+                esp = "";
             }
-            String nombre = "Espectador" + esp+i;
+            String nombre = "Espectador" + esp + i;
             int edad = (int) (Math.random() * 100);
             int dinero = (int) (Math.random() * 10000);
             aux = new Espectador(nombre, edad, dinero, null);
@@ -88,10 +88,12 @@ public class CineServicio {
     public void llenarSala(Cine c) {
         Asiento k = null, butaca = null;
         Boolean v, disponible = true;
-        int indice;
+        int indice = 0;
         Espectador aux;
         Collections.shuffle(espectadores);
         Iterator<Espectador> it = espectadores.iterator();
+        List<Asiento> ls = new ArrayList(sala.keySet());
+        Collections.shuffle(ls);
 
         while (it.hasNext()) {
             aux = it.next();
@@ -101,21 +103,38 @@ public class CineServicio {
                 if (aux.getDinero() >= c.getPrecio()) {
 
                     if (c.getAsientosDisponibles() > 0) {
-                        for (Map.Entry<Asiento, Boolean> entry : c.getSala().entrySet()) {
-                            if (!entry.getValue() && disponible) {
-                                k = entry.getKey();
-                                entry.setValue(true);
-                                v = entry.getValue();
-                                indice = entry.hashCode();
-                                c.setAsientosDisponibles(c.getAsientosDisponibles() - 1);
-                                disponible = false;
-                                break;
+                        if (sala.containsKey(ls.get(indice))) {
+                            for (Map.Entry<Asiento, Boolean> entry : c.getSala().entrySet()) {
+                                if (entry.getKey().equals(ls.get(indice)) && !entry.getValue() && disponible) {
+                                    k = entry.getKey();
+                                    entry.setValue(true);
+                                    v = entry.getValue();
+                                    //indice = entry.hashCode();
+                                    c.setAsientosDisponibles(c.getAsientosDisponibles() - 1);
+                                    disponible = false;
+                                    break;
+                                }
                             }
 
+                        } else {
+
+                            for (Map.Entry<Asiento, Boolean> e : c.getSala().entrySet()) {
+                                if (!e.getValue() && disponible) {
+                                    k = e.getKey();
+                                    e.setValue(true);
+                                    v = e.getValue();
+                                    //indice = entry.hashCode();
+                                    c.setAsientosDisponibles(c.getAsientosDisponibles() - 1);
+                                    disponible = false;
+                                    break;
+
+                                } else {
+                                    System.out.println("No quedan asientos disponibles");
+                                }
+                            }
                         }
-                    } else {
-                        System.out.println("No quedan asientos disponibles");
                     }
+
                 } else {
                     System.out.println(aux.getNombre() + ": No tiene suficiente dinero. Disponible: " + aux.getDinero());
                 }
@@ -124,10 +143,11 @@ public class CineServicio {
             }
             if (!disponible) {
                 aux.setTicket(k);
-                aux.setDinero(aux.getDinero()-1000);
+                aux.setDinero(aux.getDinero() - 1000);
                 sala.put(k, true);
                 c.setSala(sala);
             }
+            indice++;
 
         }
     }
@@ -158,9 +178,9 @@ public class CineServicio {
         Collections.sort(espectadores, Espectador.compararMenor);
         for (Espectador e : espectadores) {
             if (e.getTicket() == null) {
-                System.out.println(e.getNombre() + " Sin ticket" + " disponible= "+e.getDinero() );
+                System.out.println(e.getNombre() + " Sin ticket" + " disponible= " + e.getDinero());
             } else {
-                System.out.println(e.getNombre() + " " + e.getTicket()+ " disponible= "+e.getDinero());
+                System.out.println(e.getNombre() + " " + e.getTicket() + " disponible= " + e.getDinero());
             }
         }
 
